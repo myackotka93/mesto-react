@@ -1,7 +1,7 @@
 import React from 'react';
 import logo_header from '../images/logo-header.svg';
 
-export const Header = () => {
+const Header = () => {
     return (
         <header className="header">
             <a className="header__link" href="#" target="_blank">
@@ -10,3 +10,5 @@ export const Header = () => {
         </header>
     );
 }
+
+export default Header;
