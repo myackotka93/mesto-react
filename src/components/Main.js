@@ -51,9 +51,9 @@ const Main = ({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) => {
 
   <section className="cards">
     <ul className="cards__container">
-    {cards.map((card, index) => {
+    {cards.map((card) => {
         return <Card
-        key={index}
+        key={card._id}
         card={card}
         onCardClick={onCardClick}
         />

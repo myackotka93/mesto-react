@@ -2,11 +2,11 @@ import React from 'react';
 
 const PopupWithForm = ({title, name, children, isOpen, textBtn, onClose}) => {
 
-    let popupIsVisible = isOpen ? 'popup_opened' : '';
+    const popupIsVisible = isOpen ? 'popup_opened' : '';
 
     return(
         <section className={`popup popup_${name} ${popupIsVisible}`}>
-            <div className="popup__area popup__close"></div>
+            <div className="popup__area popup__close" onClick={onClose}></div>
             <div className="popup__container">
                 <form className={`popup__form popup__form_${name}`}>
                     <h2 className="popup__title">{title}</h2>
