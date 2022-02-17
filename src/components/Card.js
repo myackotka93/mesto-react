@@ -12,7 +12,7 @@ const Card = ({card, onCardClick}) => {
       <button type="button" className="card__button-delete">
         <img className="card__delete" src={delete_svg} alt="Удалить"/>
       </button>
-      <img src={card.link} alt="Имя карточки" className="card__image" onClick={handleClick}/>
+      <img src={card.link} alt={card.name} className="card__image" onClick={handleClick}/>
       <div className="card__discription">
         <h2 className="card__title">{card.name}</h2>
         <div className="card__like-container">
