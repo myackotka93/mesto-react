@@ -19,8 +19,6 @@ const App = () => {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = useState([]);
 
-
-
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
   }
@@ -96,7 +94,6 @@ const App = () => {
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
 }
-
 
 useEffect(() => {
   handleUserData();
