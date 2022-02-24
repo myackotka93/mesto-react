@@ -83,6 +83,10 @@ export class Api {
     })
       .then(this._checkResponse)
   }
+
+  changeLikeCardStatus(cardId,toggle) {
+    return toggle ? this.putLike(cardId) : this.takeLike(cardId);
+}
 }
 
 export const api = new Api({

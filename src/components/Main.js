@@ -1,32 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {api} from '../utils/api';
+import React from 'react';
 import avatar_edit_button from '../images/pen.svg';
-import profile_avatar from '../images/jak_iv_kusto.png';
 import add_button_image from '../images/plus.svg';
 import Card from './Card';
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const Main = ({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) => {
+const Main = ({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete}) => {
 
-    const [userName, setUserName] = useState("Жак-Ив Кусто");
-    const [userDescription, setUserDescription] = useState("Исследователь океана");
-    const [userAvatar, setUserAvatar] = useState(profile_avatar);
-    const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-        api.getProfile()
-            .then ((data) => {
-                setUserName(data.name);
-                setUserDescription(data.about);
-                setUserAvatar(data.avatar);
-            })
-            .catch((err) => { console.log(err) });
-
-        api.getInitialCards()
-            .then((data) => {
-                setCards([...data]);
-            })
-            .catch((err) => { console.log(err) });
-        }, []); 
+  const currentUser = React.useContext(CurrentUserContext);
 
     return (
         <main className="main">
@@ -35,14 +15,14 @@ const Main = ({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) => {
       <div className="profile__avatar-edit-button-container">
         <img className="profile__avatar-edit-button" src={avatar_edit_button} alt="Кнопка Редактировать"/>
       </div>
-      <img src={userAvatar} alt="Аватар" className="profile__avatar-image profile__avatar"/>
+      <img src={currentUser.avatar} alt="Аватар" className="profile__avatar-image profile__avatar"/>
     </button>
     <div className="profile__info">
-      <h1 className="profile__title">{userName}</h1>
+      <h1 className="profile__title">{currentUser.name}</h1>
       <button type="button" className="profile__edit-button" onClick={onEditProfile}>
         <img src={avatar_edit_button} alt="Кнопка редактирования" className="profile__edit-button-image"/>
       </button>
-      <p className="profile__subtitle">{userDescription}</p>
+      <p className="profile__subtitle">{currentUser.about}</p>
     </div>
     <button type="button" className="profile__add-button" onClick={onAddPlace}>
       <img className="profile__add-button-image" src={add_button_image} alt="Кнопка добавить"/>
@@ -56,6 +36,8 @@ const Main = ({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) => {
         key={card._id}
         card={card}
         onCardClick={onCardClick}
+        onCardLike={onCardLike}
+        onCardDelete={onCardDelete}
         />
      })}
     </ul>
